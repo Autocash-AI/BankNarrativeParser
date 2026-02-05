@@ -1,2 +1,2 @@
-# counterparty
-This is a clean counterparty extractor and resolver, graduated from AutoCashLab project code Gamma. 
+# BankNarrativeParser
+This is a BankNarrativeParser, graduated from AutoCashLab project code Gamma. 
