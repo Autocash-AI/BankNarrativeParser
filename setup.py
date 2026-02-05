@@ -2,7 +2,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="counterparty",
-    version="0.1.6",
+    version="0.1.7",
+    author="Siddharth Gautam",
     description="A library for counterparty extraction and narrative parsing.",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
