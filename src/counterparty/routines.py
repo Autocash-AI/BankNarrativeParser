@@ -2,11 +2,12 @@ import json
 from pathlib import Path
 
 def routine1(data):
-    print("NEW KEY-VALUE PAIRS DETECTED.")
-    print(f"ADD THEM TO THE LIST")
-    for k in data[1]:
-        print(f"{k} : {data[1][k]}")
-    print()
+    # print("NEW KEY-VALUE PAIRS DETECTED.")
+    # print(f"ADD THEM TO THE LIST")
+    # for k in data[1]:
+    #     print(f"{k} : {data[1][k]}")
+    # print()
+    pass
 
 
 def routine2(key, value, inline=False):

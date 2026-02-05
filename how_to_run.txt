@@ -1,0 +1,48 @@
+HOW TO USE
+==========
+
+Once the package is installed, you can use it in any Python script:
+
+    from counterparty import get_counterparty
+
+    narrative = "WIRE TRANSFER FROM GOOGLE INC"
+    result = get_counterparty(narrative, amount=100.00)
+
+    # Access the extracted data
+    print(result['ctpty']['payer']) 
+    # Output: GOOGLE INC
+
+
+HOW TO PUBLISH TO PYPI
+======================
+
+PREREQUISITES
+-------------
+1. Create an account on pypi.org.
+1b. Authenticate 2 factor - idk why but they made it necessary to authenticate now, good practice yeah.
+2. Go to Account Settings -> API Tokens -> Add API Token.
+   - Scope: "Entire account" (for new projects).
+   - Copy the token relative (starts with pypi-). Save it!
+3. Install the publishing tools:
+   pip install --upgrade build twine
+
+STEP A: BUILD
+-------------
+Run this command in the project root to create the package files:
+    
+    python3 -m build
+
+(You will see a 'dist' folder created).
+
+STEP B: UPLOAD
+--------------
+Run this command to upload to the real PyPI:
+
+    twine upload dist/*
+
+When prompted for credentials:
+- Username: __token__
+- Password: [Paste your pypi- token here]
+
+That's it! The package will then b live and can be installed by anyone using:
+    pip install counterparty
