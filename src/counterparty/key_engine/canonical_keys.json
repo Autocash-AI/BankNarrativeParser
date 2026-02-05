@@ -1,0 +1,326 @@
+{
+  "remark": [
+    "remark"
+  ],
+  "reference": [
+    "ref",
+    "reference",
+    "full reference",
+    "full reference#",
+    "reference#",
+    "your ref",
+    "senders reference",
+    "sender ref",
+    "sndr ref",
+    "ref no",
+    "transaction ref",
+    "transaction ref no",
+    "transaction ref no",
+    "transaction ref no",
+    "return ref",
+    "related ref",
+    "creditor ref",
+    "partialref",
+    "orf",
+    "ltn",
+    "trn",
+    "srf",
+    "service ref",
+    "chip ref",
+    "chip seq",
+    "mrn seq"
+  ],
+  "fed reference": [
+    "fed ref no",
+    "fed ref",
+    "fed ref",
+    "fed imad",
+    "imad"
+  ],
+  "swift reference": [
+    "swift ref",
+    "uetr"
+  ],
+  "trace number": [
+    "trace number",
+    "trace num",
+    "trace no",
+    "bank trace num",
+    "item trace",
+    "item sequence number"
+  ],
+  "account": [
+    "account",
+    "acct",
+    "acct number",
+    "acct num",
+    "ac",
+    "bc",
+    "cr acct",
+    "dr acct",
+    "s ac",
+    "sender account",
+    "receiver account",
+    "receiver acct num"
+  ],
+  "amount": [
+    "amount",
+    "usd amount",
+    "wire amount",
+    "amt/cur",
+    "dep amt",
+    "org dep amt",
+    "actual deposit amount",
+    "advance deposit",
+    "instructed amount",
+    "exchange amount"
+  ],
+  "currency": [
+    "wire currency",
+    "fx currency",
+    "currency desc"
+  ],
+  "rate": [
+    "rate",
+    "exchange rate"
+  ],
+  "date": [
+    "date",
+    "entry date",
+    "deposit date",
+    "depdate",
+    "payment date",
+    "value date",
+    "effective date",
+    "effective entry date",
+    "as of",
+    "ship date",
+    "desc date"
+  ],
+  "date time": [
+    "date/time",
+    "date/time received",
+    "date/time completed",
+    "received at",
+    "sent at",
+    "created",
+    "time",
+    "ttm"
+  ],
+  "originator": [
+    "orig",
+    "org",
+    "origin",
+    "originator",
+    "ordering cust",
+    "ordering customer",
+    "b/o customer",
+    "paid to",
+    "debtor"
+  ],
+  "originator id": [
+    "orig id",
+    "org id",
+    "initiating party org id"
+  ],
+  "originator bank": [
+    "orig bank",
+    "originating bank",
+    "originating bank name",
+    "orig bank aba",
+    "org bk",
+    "org bnk",
+    "ogb",
+    "obk",
+    "obi",
+    "bbk"
+  ],
+  "beneficiary": [
+    "bnf",
+    "bn f",
+    "beneficiary",
+    "ulti bene",
+    "acc party",
+    "acct party",
+    "creditor"
+  ],
+  "beneficiary bank": [
+    "bnf bk",
+    "benebnk",
+    "receiving bank",
+    "recv bank",
+    "recv bnk",
+    "creditor agent",
+    "instructed agent"
+  ],
+  "sender": [
+    "sender name",
+    "sending co name",
+    "sender account",
+    "sender ac",
+    "sender address",
+    "sender financial institution id",
+    "snd bk",
+    "snd bnk",
+    "sbk"
+  ],
+  "receiver": [
+    "receiver name",
+    "recv name",
+    "receiver account",
+    "receiver acct num",
+    "receiver aba num",
+    "receiver address",
+    "receiver financial institution id",
+    "recv id no"
+  ],
+  "bank id": [
+    "bank id",
+    "cr bank id",
+    "dr bank id",
+    "fed id",
+    "bic",
+    "aba",
+    "ins bk",
+    "ibk",
+    "bbk",
+    "ins"
+  ],
+  "bank address": [
+    "bnk street",
+    "org street",
+    "bnf street",
+    "cr address"
+  ],
+  "company": [
+    "company name",
+    "comp name",
+    "company id",
+    "comp id",
+    "orig co name",
+    "company data",
+    "company discretionary data",
+    "co discr data",
+    "discretionary data"
+  ],
+  "description": [
+    "description",
+    "desc",
+    "entry description",
+    "entry descr",
+    "entry desc r",
+    "payment details",
+    "remittance information",
+    "additional information",
+    "info",
+    "listed as",
+    "should be"
+  ],
+  "transaction type": [
+    "trans type",
+    "transaction code",
+    "payment type",
+    "type",
+    "wire type",
+    "sec code",
+    "sec",
+    "entry class",
+    "payment/purp"
+  ],
+  "purpose": [
+    "purpose",
+    "purpose code",
+    "payment/purp"
+  ],
+  "charges": [
+    "comm charge",
+    "merchant fee",
+    "merchant discount",
+    "merchant interchng",
+    "chg",
+    "fees lifted",
+    "fdms-settlement fee",
+    "nj fee pmts"
+  ],
+  "charging option": [
+    "charging option"
+  ],
+  "check": [
+    "check",
+    "check num",
+    "check no",
+    "substitute chk",
+    "cashed check"
+  ],
+  "batch": [
+    "batch id",
+    "batch discr",
+    "bag"
+  ],
+  "sweep": [
+    "daily interest sweep",
+    "sweep transfer from investment acct",
+    "sweep to investment acct",
+    "sweep interest"
+  ],
+  "id": [
+    "id",
+    "cust id",
+    "cust rrn",
+    "ind id no",
+    "ind i d no",
+    "individual id",
+    "ulid",
+    "vltid",
+    "par number",
+    "control number"
+  ],
+  "initiated by": [
+    "initiated by"
+  ],
+  "status": [
+    "confirm",
+    "approved by"
+  ],
+  "source": [
+    "src",
+    "source"
+  ],
+  "addenda": [
+    "addenda"
+  ],
+  "appended": [
+    "rec from",
+    "b/o bank",
+    "rec g fp",
+    "cust name",
+    "bbi",
+    "bbk",
+    "transaction ref no",
+    "fed ref no",
+    "ind name",
+    "instructing agent",
+    "debtor agent"
+  ],
+  "parsed": [
+    "customer name",
+    "class code",
+    "recv id no",
+    "payer",
+    "dr bnk",
+    "cr bnk",
+    "db bnk",
+    "instg bnk",
+    "addr",
+    "cty",
+    "ctry",
+    "from acct",
+    "invoice",
+    "disbursement",
+    "ibk",
+    "rfb",
+    "tcn",
+    "sett",
+    "pr"
+  ]
+}
