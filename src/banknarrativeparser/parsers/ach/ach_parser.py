@@ -1,6 +1,6 @@
 import re
-from counterparty.key_engine.keys import KEYS, INLINE_KEYS
-from counterparty.util import norm
+from banknarrativeparser.key_engine.keys import KEYS, INLINE_KEYS
+from banknarrativeparser.util import norm
 
 
 KEYS = sorted(set(KEYS), key=len, reverse=True)

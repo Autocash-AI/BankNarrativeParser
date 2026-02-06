@@ -1,15 +1,15 @@
-from counterparty.parsers.LAT_AM.pattern1 import is_pattern1, parse_pattern1
-from counterparty.parsers.LAT_AM.pattern2 import is_pattern2, parse_pattern2
-from counterparty.parsers.LAT_AM.pattern3 import is_pattern3, parse_pattern3
-from counterparty.parsers.LAT_AM.pattern4 import is_pattern4, parse_pattern4
-from counterparty.parsers.LAT_AM.pattern5 import is_pattern5, parse_pattern5
-from counterparty.parsers.LAT_AM.pattern6 import is_pattern6, parse_pattern6
-from counterparty.parsers.LAT_AM.pattern7 import is_pattern7, parse_pattern7
-from counterparty.parsers.LAT_AM.pattern8 import is_pattern8, parse_pattern8
-from counterparty.parsers.LAT_AM.pattern9 import is_pattern9, parse_pattern9
-from counterparty.parsers.LAT_AM.pattern10 import is_pattern10, parse_pattern10
-from counterparty.parsers.LAT_AM.pattern11 import is_pattern11, parse_pattern11
-from counterparty.parsers.LAT_AM.pattern12 import is_pattern12, parse_pattern12
+from banknarrativeparser.parsers.LAT_AM.pattern1 import is_pattern1, parse_pattern1
+from banknarrativeparser.parsers.LAT_AM.pattern2 import is_pattern2, parse_pattern2
+from banknarrativeparser.parsers.LAT_AM.pattern3 import is_pattern3, parse_pattern3
+from banknarrativeparser.parsers.LAT_AM.pattern4 import is_pattern4, parse_pattern4
+from banknarrativeparser.parsers.LAT_AM.pattern5 import is_pattern5, parse_pattern5
+from banknarrativeparser.parsers.LAT_AM.pattern6 import is_pattern6, parse_pattern6
+from banknarrativeparser.parsers.LAT_AM.pattern7 import is_pattern7, parse_pattern7
+from banknarrativeparser.parsers.LAT_AM.pattern8 import is_pattern8, parse_pattern8
+from banknarrativeparser.parsers.LAT_AM.pattern9 import is_pattern9, parse_pattern9
+from banknarrativeparser.parsers.LAT_AM.pattern10 import is_pattern10, parse_pattern10
+from banknarrativeparser.parsers.LAT_AM.pattern11 import is_pattern11, parse_pattern11
+from banknarrativeparser.parsers.LAT_AM.pattern12 import is_pattern12, parse_pattern12
 
 
 def is_LATAM(line: str) -> int | None:

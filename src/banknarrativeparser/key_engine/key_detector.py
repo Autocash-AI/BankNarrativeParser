@@ -274,19 +274,19 @@ class KeyDetector:
             key_start, key_end = m.span(1)
             raw_key = m.group(1)
 
-            # ❌ numeric or starts with digit → ignore
+            #  numeric or starts with digit → ignore
             if raw_key[0].isdigit():
                 continue
 
             clean_key = self._clean(raw_key)
 
-            # ❌ already known or part of known key
+            #  already known or part of known key
             if clean_key in self.all_variants:
                 continue
             if raw_key in canonical_tokens:
                 continue
 
-            # ❌ overlaps accepted canonical match
+            #  overlaps accepted canonical match
             overlap = False
             for a_start, a_end in accepted_spans:
                 if not (key_end <= a_start or key_start >= a_end):

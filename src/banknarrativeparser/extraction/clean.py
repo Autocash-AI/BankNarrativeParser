@@ -29,6 +29,17 @@ def is_garbage_token(t: str) -> bool:
     return False
 
 def getEntity(text):
+    """Clean the input text to extract a legal entity name.
+
+    Normalizes whitespace/delimiters, truncates at long numeric tokens (>4 digits),
+    and attempts to extract the name using legal suffixes, markers, or clean fallbacks.
+
+    Args:
+        text (str): The raw text to process.
+
+    Returns:
+        str or None: The cleaned entity name, or None if no valid name found.
+    """
     if not text or not text.strip():
         return None
 
@@ -52,9 +63,20 @@ def getEntity(text):
     if start_idx >= len(tokens):
         return None
     
-    text = " ".join(tokens[start_idx:])
-    tokens = text.split()
-
+    # Truncate tokens as soon as we hit a long number (>4 digits)
+    # This cleans up all "mess" after the number.
+    tokens = tokens[start_idx:]
+    truncated_tokens = []
+    for t in tokens:
+        if re.search(r"\d{5,}", t):
+            break
+        truncated_tokens.append(t)
+    
+    if not truncated_tokens:
+        return None
+        
+    tokens = truncated_tokens
+    text = " ".join(tokens)
     
     # 1. ORG via legal suffix (end-anchored)
     # We look for the last token that is a legal suffix

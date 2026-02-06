@@ -1,12 +1,13 @@
-# Counterparty Extraction Library
+# BankNarrativeParser Library
 
-A Python library designed to parse financial transaction narratives and extract key counterparty information (Payer, Payee, and Counterparty Name).
+A Python library designed to parse bank transaction narratives and extract key counterparty information (Payer and Payee) with specific logic for various transaction types (ACH, Wire, Check, PIX, etc.).
 
 ## Features
 
-*   **Narrative Parsing**: Automatically detects transaction types (Wire, ACH, Check, etc.).
-*   **Entity Extraction**: Identifies the 'Payer' and 'Payee' from complex strings.
-*   **Clean Output**: Returns a structured JSON response separating parsing metadata from extraction results.
+*   **Narrative Parsing**: Automatically detects transaction types and extracts structured metadata.
+*   **Counterparty Extraction**: Identifies the 'Payer' and 'Payee' from complex narrative strings.
+*   **Reasoning**: Provides a `reason` field explaining the logic used for each extraction.
+*   **Clean Output**: Returns structured JSON, excluding raw inputs and internal amounts from the final result.
 
 ## Installation
 
@@ -16,55 +17,54 @@ You can install this package locally using `pip`.
 Recommended if you plan to modify the code.
 ```bash
 git clone <repository-url>
-cd counterparty
+cd BankNarrativeParser
 pip install -e .
 ```
 
 ### Standard Install
 ```bash
-cd counterparty
+cd BankNarrativeParser
 pip install .
 ```
 
 ## Usage
 
-The package provides a simple entry point `get_counterparty`.
+The package provides a main class `BankNarrativeParser`.
 
 ```python
-from counterparty import get_counterparty
+from banknarrativeparser import BankNarrativeParser
 
-# 1. Define your transaction details
-narrative = "WIRE TRANSFER. Orig : GOOGLE INC"
-amount = 100.00  # Optional, but helps infer direction (Credit vs Debit)
+# 1. Initialize the parser
+parser = BankNarrativeParser()
 
-# 2. Extract info
-result = get_counterparty(narrative, amount=amount)
+# 2. Define your transaction details
+narrative = "WIRE TRANSFER FROM GOOGLE INC"
+amount = 100.00  # Optional, helps with inference
 
-# 3. Use the result
+# 3. Parse Metadata (removes original RAW text)
+parsed_meta = parser.parse(narrative)
+print(parsed_meta)
+
+# 4. Extract Counterparties (removes amount, adds reason)
+result = parser.get_counterparties(narrative, amount=amount)
 print(result)
 ```
 
 ## Output Structure
 
-The output is a nested dictionary with two main sections:
+### get_counterparties Output:
+Returns a dictionary containing:
+*   `payer`: The name of the payer (if found).
+*   `payee`: The name of the payee (if found).
+*   `counterparty`: The inferred primary counterparty.
+*   `reason`: A descriptive string explaining the rule matched.
 
-*   `parsed`: Contains the raw parsing details and metadata (e.g., transaction type).
-*   `ctpty`: Contains the extracted entity information.
-
-**Example Output:**
+**Example:**
 ```json
 {
-    "parsed": {
-        "RAW": "WIRE TRANSFER. Orig: GOOGLE INC",
-        "ORIG": "GOOGLE INC",
-        "META": "WIRE TRANSFER",
-        "parser_type": "wire"
-    },
-    "ctpty": {
-        "payer": "GOOGLE INC",
-        "payee": null,
-        "counterparty": "GOOGLE INC",
-        "amount": 100.0
-    }
+    "payer": "GOOGLE INC",
+    "payee": null,
+    "counterparty": "GOOGLE INC",
+    "reason": "Found explicit payer (key: ordering customer)"
 }
 ```

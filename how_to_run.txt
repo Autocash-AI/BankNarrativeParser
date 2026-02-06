@@ -3,13 +3,14 @@ HOW TO USE
 
 Once the package is installed, you can use it in any Python script:
 
-    from counterparty import get_counterparty
+    from banknarrativeparser import BankNarrativeParser
 
+    parser = BankNarrativeParser()
     narrative = "WIRE TRANSFER FROM GOOGLE INC"
-    result = get_counterparty(narrative, amount=100.00)
+    result = parser.get_counterparties(narrative, amount=100.00)
 
     # Access the extracted data
-    print(result['ctpty']['payer']) 
+    print(result['payer']) 
     # Output: GOOGLE INC
 
 
@@ -19,11 +20,11 @@ HOW TO PUBLISH TO PYPI
 PREREQUISITES
 -------------
 1. Create an account on pypi.org.
-1b. Authenticate 2 factor - idk why but they made it necessary to authenticate now, good practice yeah.
-2. Go to Account Settings -> API Tokens -> Add API Token.
-   - Scope: "Entire account" (for new projects).
-   - Copy the token relative (starts with pypi-). Save it!
-3. Install the publishing tools:
+2. Authenticate with 2FA (required by PyPI).
+3. Go to Account Settings -> API Tokens -> Add API Token.
+   - Scope: "Entire account" (or specific project if existing).
+   - Copy the token (starts with pypi-). Save it!
+4. Install the publishing tools:
    pip install --upgrade build twine
 
 STEP A: BUILD
@@ -44,5 +45,5 @@ When prompted for credentials:
 - Username: __token__
 - Password: [Paste your pypi- token here]
 
-That's it! The package will then b live and can be installed by anyone using:
-    pip install counterparty
+That's it! The package will then be live and can be installed by anyone using:
+    pip install banknarrativeparser

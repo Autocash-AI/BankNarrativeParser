@@ -1,30 +1,30 @@
 # routes to respective parsers
 
-from counterparty.parsers.disbursement.disb_parser import parse_disbursement_narrative,is_disbursement_narrative
-from counterparty.parsers.fundsTransfer.fundsTrans_parser import parse_funds_transfer_frmdep,is_funds_transfer_frmdep
-from counterparty.parsers.vendorpay.vp_parser import parse_vendor_pay_narrative,is_vendor_pay_narrative
-from counterparty.parsers.vendorpymt.vpymt_parser import parse_vendor_payment_rmr, parse_vendor_payment_remittance,is_vendor_payment_remittance,is_vendor_payment_rmr
-from counterparty.parsers.avidpay.avidp_check_parser import parse_avidpay_check,is_avidpay_check
-from counterparty.parsers.avidpay.avidp_gen_parser import parse_avidpay_generic,is_avidpay_generic
-from counterparty.parsers.misc.cardp import parse_card_payment,is_card_payment
-from counterparty.parsers.misc.invo import parse_invoice_reference,is_invoice_reference
-from counterparty.parsers.misc.webt import parse_web_transfer,is_web_transfer
-from counterparty.parsers.remittance.remi import parse_remittance_advice,is_remittance_advice
-from counterparty.parsers.merchref.merch_ref_parser import parse_merchant_reference,is_merchant_reference
-from counterparty.parsers.paypal.paypal import parse_paypal,classify_paypal
-from counterparty.parsers.processor_eft.peft import parse_processor_eft,is_processor_eft
-from counterparty.parsers.directdebit.directdeb import parse_direct_debit,is_direct_debit
-from counterparty.parsers.LAT_AM.LAT_AM_Entry import LATAM_parse,is_LATAM
+from banknarrativeparser.parsers.disbursement.disb_parser import parse_disbursement_narrative,is_disbursement_narrative
+from banknarrativeparser.parsers.fundsTransfer.fundsTrans_parser import parse_funds_transfer_frmdep,is_funds_transfer_frmdep
+from banknarrativeparser.parsers.vendorpay.vp_parser import parse_vendor_pay_narrative,is_vendor_pay_narrative
+from banknarrativeparser.parsers.vendorpymt.vpymt_parser import parse_vendor_payment_rmr, parse_vendor_payment_remittance,is_vendor_payment_remittance,is_vendor_payment_rmr
+from banknarrativeparser.parsers.avidpay.avidp_check_parser import parse_avidpay_check,is_avidpay_check
+from banknarrativeparser.parsers.avidpay.avidp_gen_parser import parse_avidpay_generic,is_avidpay_generic
+from banknarrativeparser.parsers.misc.cardp import parse_card_payment,is_card_payment
+from banknarrativeparser.parsers.misc.invo import parse_invoice_reference,is_invoice_reference
+from banknarrativeparser.parsers.misc.webt import parse_web_transfer,is_web_transfer
+from banknarrativeparser.parsers.remittance.remi import parse_remittance_advice,is_remittance_advice
+from banknarrativeparser.parsers.merchref.merch_ref_parser import parse_merchant_reference,is_merchant_reference
+from banknarrativeparser.parsers.paypal.paypal import parse_paypal,classify_paypal
+from banknarrativeparser.parsers.processor_eft.peft import parse_processor_eft,is_processor_eft
+from banknarrativeparser.parsers.directdebit.directdeb import parse_direct_debit,is_direct_debit
+from banknarrativeparser.parsers.LAT_AM.LAT_AM_Entry import LATAM_parse,is_LATAM
 
-from counterparty.parsers.wire.wire_parser import wire_parser,is_wire
-from counterparty.parsers.ach.ach_parser import ach_parser,is_ach
-from counterparty.parsers.swift.swift_parser import swift_parser,is_swift
+from banknarrativeparser.parsers.wire.wire_parser import wire_parser,is_wire
+from banknarrativeparser.parsers.ach.ach_parser import ach_parser,is_ach
+from banknarrativeparser.parsers.swift.swift_parser import swift_parser,is_swift
 
-from counterparty.parsers.generic.all_parser import all_parser
+from banknarrativeparser.parsers.generic.all_parser import all_parser
 
-from counterparty.key_engine.key_detector import KeyDetector
-from counterparty.routines import routine1
-from counterparty.util import normalize_spaces
+from banknarrativeparser.key_engine.key_detector import KeyDetector
+from banknarrativeparser.routines import routine1
+from banknarrativeparser.util import normalize_spaces
 
 key_detector = KeyDetector()
 

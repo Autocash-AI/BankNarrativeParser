@@ -190,7 +190,8 @@
     "bnk street",
     "org street",
     "bnf street",
-    "cr address"
+    "cr address",
+    "address"
   ],
   "company": [
     "company name",

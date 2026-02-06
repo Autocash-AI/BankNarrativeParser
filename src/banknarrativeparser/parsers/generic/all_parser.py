@@ -1,5 +1,5 @@
 import json
-from counterparty.key_engine.keys import KEYS, INLINE_KEYS
+from banknarrativeparser.key_engine.keys import KEYS, INLINE_KEYS
 
 KEYS = sorted(set(KEYS), key=len, reverse=True)
 INLINE_KEYS = sorted(INLINE_KEYS, key=len, reverse=True)

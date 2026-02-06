@@ -246,6 +246,7 @@ KEYS = [
     "REMAR K",
     "SENT AT",
     "SND BNK",
+    "ADDRESS",
     "AMOUNT",
     "BNF BK",
     "Branch",
