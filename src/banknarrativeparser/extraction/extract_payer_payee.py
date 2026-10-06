@@ -126,6 +126,12 @@ def extract_payor_payee(
             # Customer paid out → customer is payer, company is payee
         return _finalize(recv, comp, amount, narrative, "Inferred from ACH Disbursement Funding Debit transaction type")
 
+    # Rule 2c: ACH credit return - money comes back from the original receiver, so they are the payer.
+    if "ACH" in ach_u and "RETURN DETAIL" in ach_u:
+        recv = norm2(data.get("receiver name"))
+        if recv:
+            return _finalize(recv, None, amount, narrative, "Inferred from ACH Credit Return: receiver is payer")
+
     # Rule 3: Both roles known
     if payer and payee:
         return _finalize(payer, payee, amount, narrative, f"Found explicit payer (key: {payer_source_key}) and explicit payee (key: {payee_source_key})")

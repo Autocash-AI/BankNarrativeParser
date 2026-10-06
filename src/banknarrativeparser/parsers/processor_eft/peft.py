@@ -44,6 +44,9 @@ _BANK_NAME_PATTERNS = [
 ]
 _BANK_NAME_RE = re.compile(r"^(?:" + r"|".join(_BANK_NAME_PATTERNS) + r")\b")
 
+# Bank-generated descriptors (lockbox, returned items, fees): no counterparty in the text.
+_BANK_LABEL_RE = re.compile(r"^(?:WHLS\s+LBX|LBX|LOCKBOX|RET\s+DEP\s+ITEM|ANALYSIS\s+CHARGE)\b")
+
 
 
 # PEFT DETECTION (HARDENED)
@@ -102,7 +105,7 @@ def parse_processor_eft(line: str) -> dict:
     return {
         "RAW": line,
         "TRANS_TYPE": "PROCESSOR_EFT",
-        "ENTITY": m.group("proc").strip(),
+        "ENTITY": None if _BANK_LABEL_RE.match(norm) else m.group("proc").strip(),
         "PROCESSOR_CODE": m.group("code"),
         "BATCH_ID": m.group("batch"),
         "DATE": m.group("date") or m.group("date_dash"),
