@@ -29,12 +29,17 @@ class BankNarrativeParser:
             
         return result
 
-    def get_counterparties(self, narrative: str, amount: Optional[float] = None) -> dict:
+    def get_counterparties(self, narrative: str, amount: Optional[float] = None, bank: Optional[str] = None,
+                           direction: Optional[str] = None, bai_description: Optional[str] = None) -> dict:
         """Extracts counterparties from the narrative.
 
         Args:
             narrative: The raw bank narrative string.
             amount: The transaction amount (optional), used for inference.
+            bank: The bank or account name starting with PNC / US / KEY (optional). With it, the bank-specific
+                rules in extraction/bank_rules.py run last, when no other rule finds a name.
+            direction: 'credit' or 'debit' (optional), defaults to the sign of the amount.
+            bai_description: The BAI code description (optional), used by the KeyBank rules.
 
         Returns:
             A dictionary containing:
@@ -50,7 +55,10 @@ class BankNarrativeParser:
         extraction_result = extract_payor_payee(
             parsed=parsed_result,
             amount=amount,
-            narrative=narrative
+            narrative=narrative,
+            bank=bank,
+            direction=direction,
+            bai_description=bai_description,
         )
         
         # Removeing amount from result

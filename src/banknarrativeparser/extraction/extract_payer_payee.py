@@ -3,6 +3,7 @@ from typing import Any, Dict, Optional
 from banknarrativeparser.util import norm2
 from banknarrativeparser.extraction.infer_counterparty import infer_counterparty
 from banknarrativeparser.extraction.clean import getEntity
+from banknarrativeparser.extraction.bank_rules import BANK_RULES, bank_of, direction_of, derive_bank_counterparty
 
 
 # these keys will be used to tell who is the payer, who is the payee after parsing.
@@ -65,6 +66,9 @@ def extract_payor_payee(
     parsed: Dict[str, Any],
     amount: Optional[float] = None,
     narrative: Optional[str] = None,
+    bank: Optional[str] = None,
+    direction: Optional[str] = None,
+    bai_description: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Extracts payer and payee from parsed narrative data using various rules.
 
@@ -72,6 +76,9 @@ def extract_payor_payee(
         parsed: The dictionary of parsed narrative fields.
         amount: The transaction amount (optional).
         narrative: The original narrative string (optional).
+        bank: The bank, or the account name starting with PNC / US / KEY (optional). Enables Rule 6b, the lowest-priority rule; without it the rule is skipped.
+        direction: 'credit' or 'debit' (optional). Defaults to the sign of the amount.
+        bai_description: The BAI code description (optional), used by the KeyBank rules.
 
     Returns:
         A dictionary with keys 'payer', 'payee', 'counterparty', 'amount', and 'reason'.
@@ -175,6 +182,20 @@ def extract_payor_payee(
             return _finalize(ctpty, None, amount, narrative, f"{reason_base}, inferred as Payer (Amount Positive)")
 
         return _finalize(None, ctpty, amount, narrative, reason_base)
+
+    # Rule 6b: Bank-specific narrative rules, lowest priority: only when no rule above found a name (PNC, US Bank, KeyBank, fixed names). Name is taken as is: no entity cleanup.
+    bank_code = bank_of(bank)
+    if bank_code:
+        direction = direction_of(amount, direction)
+        name, rule_no = derive_bank_counterparty(bank_code, direction, narrative or "", bai_description)
+        if name:
+            return {
+                "payer": name if direction == "credit" else None,
+                "payee": name if direction == "debit" else None,
+                "counterparty": name,
+                "amount": amount,
+                "reason": f"Bank rule {rule_no} ({BANK_RULES[rule_no]})",
+            }
 
     # Rule 7: Amount-only inference
     if amount is not None:
