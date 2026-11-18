@@ -41,7 +41,7 @@ class BankNarrativeParser:
                 rules in extraction/bank_rules.py run last, when no other rule finds a name.
             direction: 'credit' or 'debit' (optional), defaults to the sign of the amount.
             bai_description: The BAI code description (optional), used by the KeyBank rules.
-            tenant: 'phasewell' (or 'pswl') to run Phasewell's own regex rules first (extraction/phasewell_rules.py). With it, `bank`
+            tenant: 'phasewell' (or 'pswl') to run Phasewell's own regex rules last, after the generic rules (extraction/phasewell_rules.py). With it, `bank`
                 is the account name or bank code (JPMC, BofA, TD, SS, Banco, FB). Default None: generic behaviour.
 
         Returns:

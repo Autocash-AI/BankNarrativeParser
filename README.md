@@ -78,7 +78,7 @@ parser.get_counterparties(narrative, amount=-500.0, bank="Operating - JPMC", ten
 # {'payer': None, 'payee': 'Paychex', 'counterparty': 'Paychex', 'reason': 'Phasewell rule J05 (party)'}
 ```
 
-*   The first matching rule decides, and it runs before the generic rules. If no Phasewell rule matches, the generic rules run as usual.
+*   The first matching rule decides, and the Phasewell rules run last, after the generic rules: they apply only when no generic rule found a name.
 *   `party` and `payroll` rules give a name, cleaned and mapped to one standard spelling (`ALIASES`). Rules for `internal`, `fee`, `interest`, `return`, `check`, `deposit` and `unknown` are recognised but give no counterparty, and the reason says so.
 *   The rules are the same as `CPTY_RULES` / `ALIASES` in the data-analytics project (`analytics/classification/pswl_counterparty.py`). Change them in both places, or the two will drift apart.
 *   Without `tenant`, behaviour is unchanged for every other tenant.
