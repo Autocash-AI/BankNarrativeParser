@@ -4,6 +4,9 @@ from banknarrativeparser.util import norm2
 from banknarrativeparser.extraction.infer_counterparty import infer_counterparty
 from banknarrativeparser.extraction.clean import getEntity
 from banknarrativeparser.extraction.bank_rules import BANK_RULES, bank_of, direction_of, derive_bank_counterparty
+from banknarrativeparser.extraction.phasewell_rules import derive_phasewell_counterparty
+
+PHASEWELL_TENANTS = {"phasewell", "pswl"}
 
 
 # these keys will be used to tell who is the payer, who is the payee after parsing.
@@ -69,6 +72,7 @@ def extract_payor_payee(
     bank: Optional[str] = None,
     direction: Optional[str] = None,
     bai_description: Optional[str] = None,
+    tenant: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Extracts payer and payee from parsed narrative data using various rules.
 
@@ -79,6 +83,8 @@ def extract_payor_payee(
         bank: The bank, or the account name starting with PNC / US / KEY (optional). Enables Rule 6b, the lowest-priority rule; without it the rule is skipped.
         direction: 'credit' or 'debit' (optional). Defaults to the sign of the amount.
         bai_description: The BAI code description (optional), used by the KeyBank rules.
+        tenant: 'phasewell' (or 'pswl') runs Phasewell's own regex rules (extraction/phasewell_rules.py) last, after the generic rules, with `bank` read as the
+            account name or bank code (JPMC, BofA, TD, SS, Banco, FB). Other values and None leave the generic behaviour unchanged.
 
     Returns:
         A dictionary with keys 'payer', 'payee', 'counterparty', 'amount', and 'reason'.
@@ -195,6 +201,19 @@ def extract_payor_payee(
                 "counterparty": name,
                 "amount": amount,
                 "reason": f"Bank rule {rule_no} ({BANK_RULES[rule_no]})",
+            }
+
+    # Rule 6c: tenant-specific regex rules (Phasewell), run last: only when no generic rule above found a name. The first matching Phasewell rule decides.
+    if tenant and tenant.lower() in PHASEWELL_TENANTS:
+        pw_direction = direction_of(amount, direction)
+        name, rule_id, kind = derive_phasewell_counterparty(bank, pw_direction, narrative or "")
+        if rule_id:
+            return {
+                "payer": name if pw_direction == "credit" else None,
+                "payee": name if pw_direction == "debit" else None,
+                "counterparty": name,
+                "amount": amount,
+                "reason": f"Phasewell rule {rule_id} ({kind})" + ("" if name else ", no outside counterparty"),
             }
 
     # Rule 7: Amount-only inference
