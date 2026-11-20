@@ -53,7 +53,9 @@ def ach_return_parser(narr: str):
     if not t:
         return None
 
-    if not ACH_RETURN_RE.search(t):
+    # Addenda is free remittance text ("REF*ACH RETURN INV-..."); it must not flag the entry as a return.
+    head = re.split(r"\bADDENDA\b", t, maxsplit=1)[0]
+    if not ACH_RETURN_RE.search(head):
         return None
 
     out = {
@@ -155,8 +157,24 @@ def ach_parser_v2(v1_output: dict):
     return out
 
 
+def _drop_keys_inside_values(narr, marks):
+    """Drop a colon-less key that directly follows an empty-valued key.
+
+    "Comp Name: INVOICE CLOUD" must not split on the INVOICE key.
+    """
+    out, prev_end = {}, None
+    for i, k in marks.items():
+        gap_empty = prev_end is not None and not narr[prev_end:i].strip(" :=,")
+        no_colon = not narr[i + len(k):].lstrip().startswith(":")
+        if gap_empty and no_colon:
+            continue
+        out[i] = k
+        prev_end = i + len(k)
+    return out
+
+
 def ach_parser_v1(narr: str):
-    marks = find_keys(narr, KEYS)
+    marks = _drop_keys_inside_values(narr, find_keys(narr, KEYS))
 
     idx = [0] + list(marks.keys()) + [len(narr)]
     out = {}
